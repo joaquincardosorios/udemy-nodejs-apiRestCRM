@@ -32,3 +32,6 @@ Content-Type: application/json
     "email": "acardoso@gmail.com",
     "telefono": "923238681"
 }
+
+#### DELETE
+DELETE {{base}}/clientes/64c18deaf2d3c593c04408f0

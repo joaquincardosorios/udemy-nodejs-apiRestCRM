@@ -29,7 +29,7 @@ exports.mostrarCliente = async (req,res,next) => {
     try {
         const cliente = await Clientes.findById(req.params.idCliente)
         if (!cliente){
-            res.json({mensaje:'El cliente no existe'})
+            return res.json({mensaje:'El cliente no existe'})
         }
         res.json(cliente)
     } catch (error) {
