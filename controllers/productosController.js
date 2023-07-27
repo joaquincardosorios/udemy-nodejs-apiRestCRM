@@ -40,7 +40,7 @@ exports.nuevoProducto = async (req, res, next) => {
     const producto = new Productos(req.body)
     
     try {
-        if(req.file.filename) {
+        if(req.file) {
             producto.imagen = req.file.filename
         }
         // almacenar registro
@@ -67,7 +67,8 @@ exports.mostrarProducto = async (req,res,next) => {
     try {
         const producto = await Productos.findById(req.params.idProducto)
         if (!producto){
-            return res.json({mensaje:'El producto no existe'})
+            res.json({mensaje:'El producto no existe'})
+            return next()
         }
         res.json(producto)
     } catch (error) {
@@ -79,8 +80,19 @@ exports.mostrarProducto = async (req,res,next) => {
 // Actualiza un producto por su id
 exports.actualizarProducto = async (req,res,next) => {
     try {
-        console.log('hola')
-        const producto = await Productos.findOneAndUpdate({ _id : req.params.idProducto}, req.body, {
+        
+        // construir nuevo producto
+        let nuevoProducto = req.body
+        
+        // Verificar si hay imagen nueva
+        if(req.file) {
+            nuevoProducto.imagen = req.file.filename
+        } else {
+            const productoAnterior = await Productos.findById(req.params.idProducto) 
+            nuevoProducto = productoAnterior.imagen
+        }
+
+        const producto = await Productos.findOneAndUpdate({ _id : req.params.idProducto}, nuevoProducto, {
             new: true
         })
         res.json(producto)
