@@ -1,0 +1,41 @@
+@base = http://localhost:5000
+
+#### GET
+GET {{base}}/pedidos
+
+#### GET
+GET {{base}}/pedidos/64c27c15fa64bfc0bd81f95b
+
+#### GET
+GET {{base}}/clientes/64c18dd5f2d3c593c04408e4
+
+#### POST
+POST {{base}}/pedidos
+Content-Type: application/json
+
+{
+    "cliente" : "64c18dd5f2d3c593c04408ee",
+    "pedido" : [
+        { "producto" : "64c27368df96e029f4186aeb", "cantidad": 2},
+        { "producto" : "64c27368df96e029f4186aeb", "cantidad": 3}
+    ],
+    "total": "129.99"
+}
+
+#### PUT
+PUT {{base}}/pedidos/64c27c15fa64bfc0bd81f95b
+Content-Type: application/json
+
+{
+    "cliente" : "64c18dd5f2d3c593c04408ee",
+    "pedido" : [
+        { "producto" : "64c272b6b1dd70e6d565c13b", "cantidad": 2},
+        { "producto" : "64c27368df96e029f4186aeb", "cantidad": 3},
+        { "producto" : "64c27380df96e029f4186aed", "cantidad": 2}
+
+    ],
+    "total": "129.99"
+}
+
+#### DELETE
+DELETE {{base}}/pedido/64c27c15fa64bfc0bd81f95b
