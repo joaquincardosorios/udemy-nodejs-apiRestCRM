@@ -1,4 +1,4 @@
-@base = http://localhost:5000
+@base = http://192.168.1.114:10001
 
 #### GET
 GET {{base}}/pedidos
